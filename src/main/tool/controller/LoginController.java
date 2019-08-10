@@ -1,5 +1,7 @@
 package tool.controller;
 
+import tool.service.UserServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,12 +12,23 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
+    private UserServiceImpl userService = new UserServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
+        if(userService.checkIfValid(username,password)){
+            req.getSession().setAttribute("user",username);
+        resp.sendRedirect(getServletContext().getContextPath()+"/");
+    }else {
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req,resp);
+        }
     }
 }

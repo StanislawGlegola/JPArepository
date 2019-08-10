@@ -4,13 +4,15 @@ import tool.dao.UserDao;
 import tool.dao.UserDaoImpl;
 import tool.model.User;
 
-public class UserService {
+public class UserServiceImpl implements UserService {
 
     private UserDao userDao = new UserDaoImpl();
 
-    boolean checkIfValid (String login, String password) {
+    public boolean checkIfValid (String login, String password) {
         User user = userDao.getUser(login);
 
-        return user.getLogin().equals(login) && user.getPassword().equals(password);
+        return user != null
+                && user.getLogin().equals(login)
+                && user.getPassword().equals(password);
     }
 }
