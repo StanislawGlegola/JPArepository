@@ -10,7 +10,6 @@ public class UserDaoImpl implements UserDao {
         if (login.equals("login")) {
             return new User("login", "pwd");
         }
-
         return null;
     }
 }

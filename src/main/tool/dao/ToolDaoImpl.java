@@ -2,10 +2,11 @@ package tool.dao;
 
 import tool.model.Tool;
 import tool.model.ToolType;
+
 import java.util.Arrays;
 import java.util.List;
 
-public class ToolDaoImpl implements ToolDao{
+public class ToolDaoImpl implements ToolDao {
 
     private List<Tool> tools;
 
@@ -46,6 +47,5 @@ public class ToolDaoImpl implements ToolDao{
                 .filter(tool -> tool.getId() == id)
                 .findAny()
                 .ifPresent(tool -> tool.setAvailable(isAvailable));
-
     }
 }

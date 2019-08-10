@@ -27,12 +27,10 @@ public class LoginController extends HttpServlet {
 
         if (userService.checkIfValid(username, password)) {
             req.getSession().setAttribute("user", username);
-
             resp.sendRedirect(getServletContext().getContextPath() + "/");
         } else {
             req.setAttribute("invalidData", true);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
-
     }
 }

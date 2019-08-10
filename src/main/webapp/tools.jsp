@@ -34,6 +34,12 @@
 
 <body>
 
+<form action="${pageContext.request.contextPath}/login" method="post"
+      style="width: 100px; height: 50px; margin: 10px 0">
+    <input type="hidden" name="action" value="logout">
+    <input type="submit" value="Log out">
+</form>
+
 <table>
     <tr>
         <th>Id</th>
@@ -57,7 +63,7 @@
             </td>
         </tr>
     </c:forEach>
-
+</table>
 
 </body>
 </html>
