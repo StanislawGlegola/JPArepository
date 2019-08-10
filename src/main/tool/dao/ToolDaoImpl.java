@@ -5,14 +5,33 @@ import tool.model.ToolType;
 import java.util.Arrays;
 import java.util.List;
 
-public class ToolDaoImpl implements ToolDao {
+public class ToolDaoImpl implements ToolDao{
+
+    private List<Tool> tools;
+
+    public ToolDaoImpl() {
+        Tool tool1 = new Tool(1, "Sonic screwdriver", ToolType.SCREWDRIVER, true);
+        Tool tool2 = new Tool(2, "Srubokret od kamaza", ToolType.WRENCH, false);
+        Tool tool3 = new Tool(3, "Stara pila", ToolType.SAW, true);
+        Tool tool4 = new Tool(4, "Czerwony mlotek", ToolType.HAMMER, true);
+
+        tools = Arrays.asList(tool1, tool2, tool3, tool4);
+    }
+
     @Override
     public List<Tool> getAll() {
-        Tool tool1 = new Tool(1, "Hammer", ToolType.HAMMER, true);
-        Tool tool2 = new Tool(2, "Screwdriver", ToolType.SCREWDRIVER, false);
-        Tool tool3 = new Tool(3, "Saw", ToolType.SAW, false);
-        Tool tool4 = new Tool(4, "Wrench", ToolType.WRENCH, true);
 
-        return Arrays.asList(tool1, tool2, tool3, tool4);
+        return tools;
+    }
+
+    @Override
+    public void setAvailability(boolean isAvailable, long id) {
+
+        for (int i =0; i<tools.size();i++){
+            if (tools.get(i).getId()==id){
+                tools.get(i).setAvailable(isAvailable);
+                return;
+            }
+        }
     }
 }
