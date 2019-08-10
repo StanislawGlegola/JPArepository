@@ -1,5 +1,5 @@
 package tool.model;
 
 public enum ToolType {
-    HAMMER, SCREWDRIVER, SAW, WRENCH
+    HAMMER, SCREWDRIVER, SAW, OTHER
 }

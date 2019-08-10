@@ -25,26 +25,17 @@ public class ToolController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        System.out.println(action);
         long id = Long.parseLong(req.getParameter("id"));
 
-        // linijka ponizej pwoduje ze po kazdym kliknieciu przycisku odswierza sie strona z pliku tools.jsp
-        req.setAttribute("tools", toolService.getAllTools());
-
         switch (action) {
-            case "take": {
+            case "take":
                 toolService.setAvailability(false, id);
                 break;
-            }
-            case "return": {
+            case "return":
                 toolService.setAvailability(true, id);
                 break;
-            }
         }
-        //przeglądarka wysswietla to co wyrzuci link ponizej
-        getServletContext().getRequestDispatcher("/tools.jsp").forward(req, resp);
-        //
-        resp.sendRedirect(getServletContext().getContextPath());
 
+        resp.sendRedirect(getServletContext().getContextPath() + "/");
     }
 }

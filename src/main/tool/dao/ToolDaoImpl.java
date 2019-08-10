@@ -11,7 +11,7 @@ public class ToolDaoImpl implements ToolDao{
 
     public ToolDaoImpl() {
         Tool tool1 = new Tool(1, "Sonic screwdriver", ToolType.SCREWDRIVER, true);
-        Tool tool2 = new Tool(2, "Srubokret od kamaza", ToolType.WRENCH, false);
+        Tool tool2 = new Tool(2, "Srubokret od kamaza", ToolType.SCREWDRIVER, false);
         Tool tool3 = new Tool(3, "Stara pila", ToolType.SAW, true);
         Tool tool4 = new Tool(4, "Czerwony mlotek", ToolType.HAMMER, true);
 
@@ -27,11 +27,25 @@ public class ToolDaoImpl implements ToolDao{
     @Override
     public void setAvailability(boolean isAvailable, long id) {
 
-        for (int i =0; i<tools.size();i++){
-            if (tools.get(i).getId()==id){
-                tools.get(i).setAvailable(isAvailable);
-                return;
-            }
-        }
+//        INNE MOZLIWOSCI:
+//        for (int i = 0; i < tools.size(); i++) {
+//            if (tools.get(i).getId() == id) {
+//                tools.get(i).setAvailable(isAvailable);
+//                return;
+//            }
+//        }
+//
+//        for(Tool tool: tools) {
+//            if (tool.getId() == id) {
+//                tool.setAvailable(isAvailable);
+//                return;
+//            }
+//        }
+
+        tools.stream()
+                .filter(tool -> tool.getId() == id)
+                .findAny()
+                .ifPresent(tool -> tool.setAvailable(isAvailable));
+
     }
 }
