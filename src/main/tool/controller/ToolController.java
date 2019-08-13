@@ -34,8 +34,7 @@ public class ToolController extends HttpServlet {
                 toolService.setAvailability(true, id);
                 break;
         }
-        resp.sendRedirect(getServletContext().getContextPath() + "/");
 
-        req.getSession().invalidate();
+        resp.sendRedirect(getServletContext().getContextPath() + "/");
     }
 }
